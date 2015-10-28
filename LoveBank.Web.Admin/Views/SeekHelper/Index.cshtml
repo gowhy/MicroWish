@@ -1,0 +1,62 @@
+﻿@model  LoveBank.Common.IPagedList<LoveBank.Web.Admin.Models.SeekHelperModel>
+@using MvcContrib.UI.Pager;
+@using LoveBank.Common
+@using LoveBank.MVC
+@using LoveBank.MVC.UI
+@using MvcContrib.UI.Grid
+
+@section HeadSection {
+    <script type="text/javascript">
+
+        function del(id) {
+
+            var url = '@Url.Action("Delete")' + '?id=' + id;
+            deleteMethod(id, "Delete");
+
+        }
+    </script>
+
+}
+
+
+<div id="button_row">
+
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-add'" href="@Url.Action("Add")">新增项目</a>
+</div>
+<div class="grid_box">
+
+    @Html.Grid(Model).Columns(column =>
+    {
+        //column.CheckBox(x => x.Id);
+        column.For(x => x.ID).Named("ID");
+        column.For(x => x.Name ?? "").Named("姓名");
+        column.For(x => x.Phone).Named("电话");
+        //column.For(x => x.Department.Name).Named("地区");
+        column.For(x => x.Address).Named("地址");
+        column.For(x => x.TotalMoney ).Named("募集资金(元)");
+        column.For(x => x.FinishMoney ).Named("完成资金(元)");
+        column.For(x => (x.FinishMoney / x.TotalMoney).ToString("p")).Named("完成比例");
+        column.For(x => x.BankCard).Named("卡号");
+
+        column.For(x => x.DeptName).Named("地区");
+        column.For(x => x.PublicTime.ToString("yyyy-MM-dd")).Named("发布时间");
+        column.For(x => x.EndTime.ToString("yyyy-MM-dd")).Named("结束时间");
+        column.For(x => x.State).Named("状态");
+        column.For(x => x.Desc).Named("项目简介");
+      
+     
+       
+        //column.For(x => (x.Department ?? new LoveBank.Core.Domain.Department()).Name ?? "").Named("所属区域");
+     
+
+        column.Buttons(btns => btns
+              //.Add(x => Html.ActionLink("编辑", "Edit", new { id = x.ID }))
+              .Add(x => Html.ActionLink("查看", "View", new { id = x.ID }))
+            //.Add(x => Html.ScriptLink("删除", "del({0})", x.ID))
+
+            );
+    }).Complex(ViewData)
+
+</div>
+
+@Html.Pager(Model)

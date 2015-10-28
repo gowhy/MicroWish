@@ -1,0 +1,320 @@
+﻿
+
+@using LoveBank.MVC
+@model LoveBank.Core.Domain.UnionHelpPoject
+
+
+
+@Html.IncludeCSS("~/Content/plug-in/ztree/css/zTreeStyle/zTreeStyle.css")
+@Html.IncludeCSS("~/Content/Css/demo.css")
+@Html.IncludeScript("~/Content/EasyUI/jquery.easyui.min.js")
+<style>
+    .panel-tool {
+        right: initial;
+        margin-left: 100px;
+    }
+
+    #uploader .placeholder {
+        padding-top: 0px;
+    }
+
+    .queueList {
+        width: 300px;
+    }
+
+    #uploader .queueList.filled {
+        padding: 0px;
+    }
+</style>
+
+    @using (Html.BeginForm("PostAddDetail", "UnionHelpPoject", FormMethod.Post, new { name = "AddForm", id = "AddForm" }))
+    {
+        <table class="form">
+            <tr>
+                <td class="item_title">
+                    项目:
+                </td>
+                <td class="item_input">
+                    @Model.PojectTitle
+
+                </td>
+            </tr>
+      
+            <tr>
+                <td class="item_title">
+                    姓名:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="Name" name="Name"
+                           data-options="required:true,validType:'length[2,20]'" /> (必填)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    性别:
+                </td>
+                <td class="item_input">
+                    <select  id="Sex" name="Sex" style="width:100px;">
+                        <option value="01">男</option>
+                        <option value="1">女</option>
+                       
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    年龄:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="Age" name="Age"
+                           data-options="required:true,validType:'length[2,20]'" /> (必填)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    身份证号:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="IDCard" name="IDCard"
+                           data-options="required:true,validType:'length[2,20]'" /> (必填)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    工作单位<br/>或家庭住址:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="Address" name="Address"
+                           data-options="required:true,validType:'length[2,20]'" /> (必填)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    帮扶金额(元):
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="Money" name="Money"
+                           data-options="required:true,validType:'length[2,20]'" /> (必填)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    联系电话:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="Phone" name="Phone"
+                           data-options="required:false,validType:'length[5,20]'" />
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    原因:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="Desc" name="Desc"
+                           data-options="required:false,validType:'length[5,1000]'" />
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    帮扶时间:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " id="HelpTime" name="HelpTime"
+                           onclick="WdatePicker()" data-options="required:false,validType:'length[5,20]'" />
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title"></td>
+                <td class="item_input2">
+                    <!--隐藏元素-->
+                    <div style="padding:5px">
+                        <input type="hidden" name="UnionHelpPojectID" id="UnionHelpPojectID" value="@Model.ID" />
+                        <a href="javascript:void(0)" class="easyui-linkbutton" id="addFromSubmit"> &nbsp  &nbsp &nbsp &nbsp &nbsp 新 增 &nbsp  &nbsp &nbsp &nbsp &nbsp </a>
+                        @*<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"> &nbsp  &nbsp &nbsp &nbsp &nbsp 重置 &nbsp  &nbsp &nbsp &nbsp &nbsp </a>*@
+                    </div>
+
+                </td>
+            </tr>
+
+        </table>
+    }
+
+
+
+
+
+<style>
+    .panel-tool {
+        right: initial;
+        margin-left: 100px;
+    }
+</style>
+@Html.IncludeScript("~/Content/plug-in/My97DatePicker/WdatePicker.js")
+
+
+
+
+@Html.IncludeScript("~/Content/plug-in/ztree/js/jquery.ztree.core-3.5.js")
+@Html.IncludeScript("~/Content/plug-in/ztree/js/jquery.ztree.excheck-3.5.js")
+
+@Html.IncludeScript("~/Content/EasyUI/easyui-lang-zh_CN.js")
+
+<style>
+    .imgWrap {
+        word-wrap: break-word;
+        word-break: normal;
+        vertical-align: bottom;
+        /*margin-top:20px;*/
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        var baseServer="/UnionHelpPoject"
+
+        function GetFromJsonData() {
+           
+          
+            var json = {
+                "Name": $("#Name").val(),
+                "Sex": $("#Sex").val(),
+                "Age": $("#Age").val(),
+                "Phone": $("#Phone").val(),
+                "IDCard": $("#IDCard").val(),
+                "Phone": $("#Phone").val(),
+                "Money": $("#Money").val(),
+                "Address": $("#Address").val(),
+                "Desc": $("#Desc").val(),
+                "HelpTime": $("#HelpTime").val(),
+                "TotalMoney": $("#TotalMoney").val(),
+                "UnionHelpPojectID": $("#UnionHelpPojectID").val()
+                //,
+                //"SourceFileList": sourceFileList
+
+            };
+            return json;
+        }
+
+
+        $("#addFromSubmit").click(function () {
+           
+
+            if (!$("#AddForm").form('validate')) {
+                return false;
+            }
+
+          
+            var objJson = GetFromJsonData();
+
+            $.ajax({
+                type: "POST",
+                url: baseServer+"/PostAddDetail",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(objJson),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Status == true) {
+                        alert("添加成功");
+                        //$('#AddForm').form('clear');
+                        //location.reload();
+
+                    } else {
+                        alert(data.Info);
+                    }
+                },
+                error: function (data) {
+                    alert("添加失败");
+                }
+            });
+        });
+
+
+
+        function clearForm() {
+            $('#AddForm').form('clear');
+        }
+
+    });
+
+
+
+</script>
+
+
+<script type="text/javascript">
+
+
+    var setting = {
+        view: {
+            dblClickExpand: false,
+            showLine: true,
+            selectedMulti: false
+
+        },
+        check: {
+            enable: true ,
+            chkStyle: "radio",
+            radioType: "all"
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "Id",
+                pIdKey: "PIds",
+                rootPId: ""
+            },
+            key: {
+                name: "Name"
+            }
+
+        },
+        callback: {
+            beforeCheck: beforeCheck,
+            onCheck: onCheck
+        }
+    };
+
+    @*var zNodes =@(Html.Raw(ViewData["Department_List"].ToString()));*@
+    var zNodes ={};
+
+    function beforeCheck(treeId, treeNode) {
+
+    }
+    function onCheck(e, treeId, treeNode) {
+        $("#DeptId").val(treeNode.Id);
+        $("#CoverCommunity").val(treeNode.Name);
+    }
+
+    function showMenu() {
+        $("#menuContent").slideDown("fast");
+        $("body").bind("mousedown", onBodyDown);
+    }
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+            hideMenu();
+        }
+    }
+
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#ztree"), setting, zNodes);
+    });
+
+</script>
+
+

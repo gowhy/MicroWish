@@ -1,0 +1,85 @@
+﻿@using LoveBank.Common;
+@using LoveBank.MVC
+@model LoveBank.Core.Domain.Vol
+
+@Html.IncludeScript("~/Content/EasyUI/jquery.easyui.min.js")
+@Html.IncludeScript("~/Content/EasyUI/easyui-lang-zh_CN.js")
+
+<form name="PostVolAddScore" id="PostVolAddScore" action="@Url.Action("PostVolAddScore")" method="post" enctype="multipart/form-data">
+    <table class="form" cellpadding="0" cellspacing="0">
+        <tbody>
+
+            <tr>
+                <td class="item_title">
+                    姓名:
+                </td>
+                <td class="item_input">
+                    <input type="hidden" name="VolID" value="@Model.ID" />
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;" name="RealName" value="@Model.RealName"
+                         disabled="disabled" /> 
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    手机号:
+                </td>
+                <td class="item_input">
+
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;" name="Phone" value="@Model.Phone"
+                           disabled="disabled" />
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    增加的积分:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-numberbox" type="text" style="height:25px; width:260px;" name="AddScore"
+                           vrequired="true" missingmessage="必须填写整数"
+                           data-options="prompt:'请输入年龄.',required:true,validType:'length[1,20]'" /> (必填)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title">
+                    加分原因:
+                </td>
+                <td class="item_input">
+                    <input class="easyui-validatebox" type="text" style="height:25px; width:260px;   " name="Msg"
+                           data-options="prompt:'请输入一体机唯一编码.',required:true,validType:'length[6,50]'" />
+
+                </td>
+            </tr>
+           
+        
+            <tr>
+                <td class="item_title"></td>
+                <td class="item_input2">
+                    <!--隐藏元素-->
+                    <div style="padding:5px">
+
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()"> &nbsp  &nbsp &nbsp &nbsp &nbsp 新 增 &nbsp  &nbsp &nbsp &nbsp &nbsp </a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"> &nbsp  &nbsp &nbsp &nbsp &nbsp 重置 &nbsp  &nbsp &nbsp &nbsp &nbsp </a>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+            function submitForm() {
+                // var url = "/SocSer/PostNoTakeIn" + '?detailId=' + id + "&state=" + state + "&msg=" + msg;
+                $('#PostVolAddScore').submit();
+            }
+            function clearForm() {
+                $('#PostVolAddScore').form('clear');
+            }
+
+            function check_incharge_form() {
+
+                return true;
+            }
+    </script>
+</form>

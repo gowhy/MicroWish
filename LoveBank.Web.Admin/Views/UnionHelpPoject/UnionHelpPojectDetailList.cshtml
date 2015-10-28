@@ -1,0 +1,58 @@
+﻿@model  LoveBank.Common.IPagedList<LoveBank.Web.Admin.Models.UnionHelpPojectDetailModel>
+@using MvcContrib.UI.Pager;
+@using LoveBank.Common
+@using LoveBank.MVC
+@using LoveBank.MVC.UI
+@using MvcContrib.UI.Grid
+
+@section HeadSection {
+    <script type="text/javascript">
+
+    
+
+        function addDetail(id) {
+
+            var url = '@Url.Action("AddDetail")' + '?unionHelpPojectID=' + id;
+
+            showAjaxResult(url, "增加项目资助详情", 650, 470);
+        }
+    </script>
+<style>
+    .dialog-content {
+        padding: 0px;
+    }
+</style>
+
+}
+
+
+
+<div class="grid_box">
+
+    @Html.Grid(Model).Columns(column =>
+    {
+        column.For(x => x.ID).Named("ID");
+        column.For(x => x.Name ?? "").Named("姓名");
+        column.For(x => x.Sex).Named("性别");
+        column.For(x => x.Age).Named("年龄");
+        column.For(x => x.IDCard).Named("身份证号");
+        column.For(x => x.Money).Named("帮扶金额");
+        column.For(x => x.Phone ?? "").Named("联系电话");
+        column.For(x => x.Desc).Named("帮扶原因");
+        column.For(x => x.HelpTime.GetValueOrDefault().ToString("yyyy-MM-dd")).Named("帮扶时间");
+     
+        column.For(x => x.AddTime.ToString("yyyy-MM-dd HH:mm")).Named("添加时间");
+        //column.For(x => x.State).Named("设备状态");
+
+        //column.Buttons(btns => btns
+      
+        //    .Add(x => Html.ScriptLink("添加资助详情", "addDetail({0})", x.ID))
+        //    .Add(x => Html.ScriptLink("删除", "del({0})", x.ID))
+
+
+        //    );
+    }).Complex(ViewData)
+
+</div>
+
+@Html.Pager(Model)

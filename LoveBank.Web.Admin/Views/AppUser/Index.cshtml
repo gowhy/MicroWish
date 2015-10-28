@@ -1,0 +1,27 @@
+﻿@model  LoveBank.Common.IPagedList<LoveBank.Core.Domain.AppUser>
+@using MvcContrib.UI.Pager;
+@using LoveBank.Common
+@using LoveBank.MVC
+@using LoveBank.MVC.UI
+@using MvcContrib.UI.Grid
+
+@section HeadSection {
+   
+
+}
+
+    @Html.Grid(Model).Columns(column =>
+    {
+        //column.CheckBox(x => x.Id);
+        column.For(x => x.ID).Named("ID");
+        column.For(x => x.Name ?? "").Named("姓名");
+        column.For(x => x.Phone).Named("电话");
+        column.For(x => x.NickName).Named("昵称");
+        column.For(x => x.Sex).Named("性别");
+        column.For(x => x.Age).Named("年龄");
+        column.For(x => x.Type).Named("类型");
+        column.For(x => x.AddTime.ToString("yyyy-MM-dd hh:mm")).Named("注册时间");
+ 
+    }).Complex(ViewData)
+
+@Html.Pager(Model)
